@@ -1,5 +1,5 @@
 # metadata-extractor
-A python script to extract metadata from EM images, using the hyperspy library.
+### A python script to extract metadata from EM images, using the hyperspy library.
 
 Unzips input.zip which contains 1 sample .emd file of a single spectrum stream, then outputs sample_metadata.json
 
