@@ -1,2 +1,17 @@
-# metadata-extractor
-A python script to extract metadata from EM images, using the hyperspy library.
+# Materials Science EM Metadata Extractor
+
+A collection of Python scripts that extract metadata from EM data for Materials Science.
+All metadata files are in json format.
+
+1. hyperspy_script:
+    - Uses python v3.10.12 and hyperspy v1.7.5
+    - Working only for .emd files, .prz files are not recongized by this version of hyperspy
+    - Output directory: 'hyperspy_script_metadata/'
+
+2. rsciio_script:
+    - Uses python v3.11.9 and the latest version of hyperspy (v2.1) which essentially leads to RosettaSciIO library (rosettasciio v0.4)
+    - Working for both .emd and .prz files, with the exception of EELSDataCube Single Image, which is still unsupported
+    - Output directory: 'rsciio_script_metadata/'
+
+3. manual_script:
+    (WIP)
