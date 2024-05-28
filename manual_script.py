@@ -5,17 +5,13 @@ import h5py
 import numpy as np
 
 
-# collect_types = set()
-# {<class 'numpy.uint32'>, <class 'numpy.uint8'>, <class 'numpy.ndarray'>}
-
-def get_ds_dictionaries(name, node):
-    # print(name)
+def get_ds_dictionaries(name, node):  
     if isinstance(node, h5py.Dataset):
-        for item in node:
-            if isinstance(item, bytes):
-                metadata_dict[name] = json.loads(item.decode('utf-8'))
-            elif isinstance(item, np.uint8) or isinstance(item, np.uint32):
-                metadata_dict[name] = item
+        try:
+            dataset = np.array(node)
+            metadata_dict[name] = json.loads(dataset[0].decode('utf-8'))
+        except:
+            pass
 
 
 if __name__ == "__main__":
@@ -34,17 +30,18 @@ if __name__ == "__main__":
 
             if filename.endswith(".prz"):
                 try:
-                    # --- with numpy ---
-                    # f = np.load(os.path.join(input_dir, filename), allow_pickle=True)
+                    # using numpy because:
+                    # h5py for .prz files gives error: 'Unable to open file (file signature not found)'
 
-                    # meta_data = f["meta_data"].tolist()
-                    # data_model = f["data_model"].tolist()
+                    f = np.load(os.path.join(input_dir, filename), allow_pickle=True)
 
-                    # for dict in meta_data:
-                    #     metadata_dict.update(dict)
-                    # for dict in data_model:
-                    #     metadata_dict.update(dict)
-                    print("skip")
+                    meta_data = f["meta_data"].tolist()
+                    data_model = f["data_model"].tolist()
+
+                    for dict in meta_data:
+                        metadata_dict.update(dict)
+                    for dict in data_model:
+                        metadata_dict.update(dict)
 
                 except Exception as e:
                     print(e)
@@ -52,15 +49,12 @@ if __name__ == "__main__":
 
             elif filename.endswith(".emd"):
                 try:
-                    # --- with h5py ---
+                    # using h5py because:
+                    # numpy for .emd files  gives error: 'Cannot load file containing pickled data when allow_pickle=False'
+                    # but when setting allow_pickle=True gives error: 'Failed to interpret file as a pickle'
+
                     f = h5py.File(os.path.join(input_dir, filename), "r")
-
-                    print(f.keys())
-                    # keys = ['Application', 'Data', 'Experiment', 'Features', 'Info', 'Operations', 'Presentation', 'Version']
-                    # keys = ["Application", "Info", "Version"]
-
                     f.visititems(get_ds_dictionaries)
-                    # print(collect_types)  
 
                 except Exception as e:
                     print(e)

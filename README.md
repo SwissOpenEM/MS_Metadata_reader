@@ -14,4 +14,6 @@ All metadata files are in json format.
     - Output directory: 'rsciio_script_metadata/'
 
 3. manual_script:
-    (WIP)
+    - Uses python v3.11.9, numpy v1.26.4 and h5py v3.9.0
+    - Working for all input files, however in some cases the metadata is lacking information
+    - Output directory: 'manual_script_metadata/'
