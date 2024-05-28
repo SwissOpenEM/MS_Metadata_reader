@@ -17,3 +17,8 @@ All metadata files are in json format.
     - Uses python v3.11.9, numpy v1.26.4 and h5py v3.9.0
     - Working for all input files, however in some cases the metadata is lacking information
     - Output directory: 'manual_script_metadata/'
+
+4. final_script: (WIP)
+    - Uses python v3.11.9, rosettasciio v0.4 and numpy v1.26.4
+    - Same as `rsciio_script` but for the unsupported .prz file it uses numpy as seen in `manual_script`
+    - Output directory: 'final_script_metadata/'
