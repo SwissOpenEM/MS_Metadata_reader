@@ -1,7 +1,17 @@
 # Materials Science EM Metadata Extractor
 
 A collection of Python scripts that extract metadata from EM data for Materials Science.
-All metadata files are in json format.
+All extracted metadata files are in json format.
+
+## Description
+
+All materials science data to be studied within the scope of OpenEM are extracted in some form of hdf5 format.
+To read them and extract their metadata, we are using extrernal libraries suited for this task.
+These extrernal dependecies are the reason this extractor is written in Python, as Go does not support all of them.
+In the rare case that a file cannot be processed by a library, the fallback solution is using numpy, as all hdf5 files can be read as numpy files.
+Their capabilities are explored below:
+
+## Code
 
 1. hyperspy_script:
     - Uses python v3.10.12 and hyperspy v1.7.5
