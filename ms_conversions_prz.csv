@@ -41,8 +41,8 @@ acquisition.detectors.DF4.type,,,,,String
 acquisition.detectors.DF4.collection_angle.minimal,,,,,Float
 acquisition.detectors.DF4.collection_angle.maximal,,,,,Float
 ,,,,,
-sample.general.name,,,,,String
-sample.general.description,,,,,String
+sample.general.sample_name,,,,,String
+sample.general.sample_description,,,,,String
 ,,,,,
 organizational.grants.project_id,,,,,
 organizational.funder.funder_name,,,,,
