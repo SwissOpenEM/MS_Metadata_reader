@@ -14,7 +14,7 @@ instrument.beam_convergence,,,,,Float
 acquisition.date_time,scan_generator.start_time,camera.time,,,String
 acquisition.defocus,,,,,Float
 acquisition.screen_current,,,,,Float
-acquisition.stem_magnification,scan_driver.magnification,,,,Float
+acquisition.stem_magnification,scan_driver.magnification,,,,Int
 acquisition.holder,,,,,String
 acquisition.image_size.height,image_size.height,,,,Int
 acquisition.image_size.width,image_size.width,,,,Int

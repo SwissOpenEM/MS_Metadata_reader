@@ -14,7 +14,7 @@ instrument.beam_convergence,Optics.BeamConvergence,,mrad,1000,Float
 acquisition.date_time,Acquisition.AcquisitionStartDatetime.DateTime,,,,String
 acquisition.defocus,Optics.Defocus,,nm,1.00E+09,Float
 acquisition.screen_current,Optics.LastMeasuredScreenCurrent,Optics.ScreenCurrent,nA,,Float
-acquisition.stem_magnification,CustomProperties.StemMagnification.value,,,,Float
+acquisition.stem_magnification,CustomProperties.StemMagnification.value,,,,Int
 acquisition.holder,Stage.HolderType,,,,String
 acquisition.image_size.height,Scan.ScanSize.height,,,,Int
 acquisition.image_size.width,Scan.ScanSize.width,,,,Int

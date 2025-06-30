@@ -14,6 +14,8 @@ def convert_final_valuetypes(metadata_dict):
         "Optics.AccelerationVoltage",
         "electron_gun.voltage",
         "electron_gun.voltage_target",
+        "CustomProperties.StemMagnification.value",
+        "scan_driver.magnification",
     ]
     for key in key_to_update:
         if key in metadata_dict:
