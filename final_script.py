@@ -7,6 +7,21 @@ from rsciio.pantarhei import file_reader as prz_reader
 from datetime import datetime
 
 
+def convert_final_valuetypes(metadata_dict):
+    """Converts values in the dictionary to their final types."""
+
+    key_to_update = [
+        "Optics.AccelerationVoltage",
+        "electron_gun.voltage",
+        "electron_gun.voltage_target",
+    ]
+    for key in key_to_update:
+        if key in metadata_dict:
+            metadata_dict[key] = str(int(float(metadata_dict[key])))
+
+    return metadata_dict
+
+
 def stringify_values(metadata_dict):
     """Recursively converts all values in the dictionary to strings."""
 
@@ -136,10 +151,12 @@ def process_prz_metadata(metadata_dict):
 def emd_extractor(metadata_dict: dict) -> dict:
     """Reads metadata from an EMD file and processes it."""
 
-    return map_emd_values(
-        flatten_metadata(
-            process_emd_metadata(
-                stringify_values(metadata_dict)
+    return convert_final_valuetypes(
+        map_emd_values(
+            flatten_metadata(
+                process_emd_metadata(
+                    stringify_values(metadata_dict)
+                )
             )
         )
     )
@@ -148,9 +165,11 @@ def emd_extractor(metadata_dict: dict) -> dict:
 def prz_extractor(metadata_dict: dict) -> dict:
     """Reads metadata from an PRZ file and processes it."""
 
-    return process_prz_metadata(
-        flatten_metadata(
-            stringify_values(metadata_dict)
+    return convert_final_valuetypes(
+        process_prz_metadata(
+            flatten_metadata(
+                stringify_values(metadata_dict)
+            )
         )
     )
 

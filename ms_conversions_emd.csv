@@ -8,7 +8,7 @@ instrument.electron_source,Acquisition.SourceType,,,,String
 instrument.illumination.mode,Optics.IlluminationMode,,,,String
 instrument.illumination.probe_mode,Optics.ProbeMode,,,,String
 instrument.operating_mode,Optics.OperatingMode,,,,String
-instrument.acceleration_voltage,Optics.AccelerationVoltage,,kV,0.001,Float
+instrument.acceleration_voltage,Optics.AccelerationVoltage,,kV,0.001,Int
 instrument.beam_convergence,Optics.BeamConvergence,,mrad,1000,Float
 ,,,,,
 acquisition.date_time,Acquisition.AcquisitionStartDatetime.DateTime,,,,String
