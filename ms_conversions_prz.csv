@@ -12,7 +12,7 @@ instrument.acceleration_voltage,electron_gun.voltage,electron_gun.voltage_target
 instrument.beam_convergence,,,,,Float
 ,,,,,
 acquisition.date_time,scan_generator.start_time,camera.time,,,String
-acquisition.defocus,,,,,Float
+acquisition.target_defocus,,,,,Float
 acquisition.screen_current,,,,,Float
 acquisition.stem_magnification,scan_driver.magnification,,,,Int
 acquisition.holder,,,,,String
