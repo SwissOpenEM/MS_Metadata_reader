@@ -12,7 +12,7 @@ instrument.acceleration_voltage,Optics.AccelerationVoltage,,kV,0.001,Int
 instrument.beam_convergence,Optics.BeamConvergence,,mrad,1000,Float
 ,,,,,
 acquisition.date_time,Acquisition.AcquisitionStartDatetime.DateTime,,,,String
-acquisition.defocus,Optics.Defocus,,nm,1.00E+09,Float
+acquisition.target_defocus,Optics.Defocus,,nm,1.00E+09,Float
 acquisition.screen_current,Optics.LastMeasuredScreenCurrent,Optics.ScreenCurrent,nA,,Float
 acquisition.stem_magnification,CustomProperties.StemMagnification.value,,,,Int
 acquisition.holder,Stage.HolderType,,,,String
