@@ -1,4 +1,4 @@
-﻿OSCEM,fromPRZ,optionalsPRZ,untisPRZ,crunchPRZ,typePRZ
+﻿OSCEM,fromPRZ,optionalsPRZ,unitsPRZ,crunchPRZ,typePRZ
 ,,,,,
 instrument.microscope.class,,,,,String
 instrument.microscope.model,,,,,String
