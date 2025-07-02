@@ -14,14 +14,13 @@ instrument.beam_convergence,Optics.BeamConvergence,,mrad,1000,Float64
 acquisition.date_time,Acquisition.AcquisitionStartDatetime.DateTime,,,,String
 acquisition.target_defocus,Optics.Defocus,,nm,1000000000,Float64
 acquisition.screen_current,Optics.LastMeasuredScreenCurrent,Optics.ScreenCurrent,nA,,Float64
-acquisition.stem_magnification,CustomProperties.StemMagnification.value,,,,Int
+acquisition.nominal_magnification,CustomProperties.StemMagnification.value,,,,Int
 acquisition.holder,Stage.HolderType,,,,String
 acquisition.image_size.height,Scan.ScanSize.height,,,,Int
 acquisition.image_size.width,Scan.ScanSize.width,,,,Int
 acquisition.exposure_time,,,,,
 acquisition.frame_time,Scan.FrameTime,,s,,Float64
-acquisition.pixel_size.height,BinaryResult.PixelSize.height,,nm,1000000000,Float64
-acquisition.pixel_size.width,BinaryResult.PixelSize.width,,nm,1000000000,Float64
+acquisition.pixel_size,BinaryResult.PixelSize.height,,Å,10000000000,Float64
 ,,,,,
 acquisition.detectors.camera.name,Detectors.Detector-camera.DetectorName,,,,String
 acquisition.detectors.camera.height,Detectors.Detector-camera.Binning.height,,,,Int
