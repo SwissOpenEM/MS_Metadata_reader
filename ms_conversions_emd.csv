@@ -40,8 +40,8 @@ acquisition.detectors.DF4.type,Detectors.Detector-DF4.DetectorType,,,,String
 acquisition.detectors.DF4.collection_angle.minimal,Detectors.Detector-DF4.CollectionAngleRange.begin,,mrad,1000,Float
 acquisition.detectors.DF4.collection_angle.maximal,Detectors.Detector-DF4.CollectionAngleRange.end,,mrad,1000,Float
 ,,,,,
-sample.general.sample_name,Sample.SampleId,,,,String
-sample.general.sample_description,Sample.SampleDescription,,,,String
+sample.general.name,Sample.SampleId,,,,String
+sample.general.description,Sample.SampleDescription,,,,String
 ,,,,,
 organizational.grants.project_id,,,,,
 organizational.funder.funder_name,,,,,
