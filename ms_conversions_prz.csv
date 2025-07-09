@@ -11,14 +11,14 @@ instrument.acceleration_voltage,electron_gun.voltage,electron_gun.voltage_target
 instrument.beam_convergence,,,,,Float64
 ,,,,,
 acquisition.date_time,scan_generator.start_time,camera.time,,,String
-acquisition.target_defocus,,,,,Float64
+acquisition.nominal_defocus.minimal,,,,,Float64
+acquisition.nominal_defocus.maximal,,,,,Float64
 acquisition.screen_current,,,,,Float64
 acquisition.nominal_magnification,scan_driver.magnification,,,,Int
 acquisition.holder,,,,,String
 acquisition.image_size.height,image_size.height,,,,Int
 acquisition.image_size.width,image_size.width,,,,Int
 acquisition.exposure_time,camera.exposure_time,,s,,Float64
-acquisition.frame_time,camera.simplon_parameters.frame_time,source.detector_config.frame_time,s,,Float64
 acquisition.pixel_size,camera.pixel_size,,Å,10000000000,Float64
 ,,,,,
 acquisition.detectors.camera.name,source.detector_config.description,,,,String
