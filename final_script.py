@@ -127,12 +127,6 @@ def map_emd_values(metadata_dict):
 def process_prz_metadata(metadata_dict):
     """ Processes the metadata dictionary to map values."""
 
-    key_to_update = "condenser.mode"
-    if key_to_update in metadata_dict:
-        probe_info = metadata_dict[key_to_update].split(":")
-        metadata_dict[key_to_update] = probe_info[1] if len(probe_info) > 1 else probe_info[0]
-        metadata_dict[key_to_update + ".probe_mode"] = probe_info[0]
-
     key_to_update = "image_size"
     if key_to_update in metadata_dict:
         image_size = tuple(map(int, metadata_dict[key_to_update].strip("()[]").replace(",", " ").split()))

@@ -5,8 +5,7 @@ instrument.microscope.model,,,,,String
 instrument.microscope.manufacturer,,,,,String
 instrument.imaging,Signal.signal_type,filter.mode,,,String
 instrument.electron_source,,,,,String
-instrument.illumination.mode,condenser.mode,,,,String
-instrument.illumination.probe_mode,condenser.mode.probe_mode,,,,String
+instrument.illumination,condenser.mode,,,,String
 instrument.operating_mode,Acquisition_instrument.TEM.acquisition_mode,,,,String
 instrument.acceleration_voltage,electron_gun.voltage,electron_gun.voltage_target,kV,0.001,Int
 instrument.beam_convergence,,,,,Float64
