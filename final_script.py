@@ -78,15 +78,15 @@ def process_emd_metadata(metadata_dict):
     # Find first detector with key Detectors.Detector-[somenumber] and DetectorName starting with prefix
     for key in list(metadata_dict["Detectors"].keys()):
         if key.startswith("Detector-") and metadata_dict["Detectors"][key].get("DetectorName", "").startswith(prefix):
-            metadata_dict["Detectors"]["BinaryResultDetector"] = metadata_dict["Detectors"].pop(key)
-            metadata_dict["Detectors"]["BinaryResultDetector"]["DetectorName"] = prefix
+            metadata_dict["Detectors"]["Detector-BinaryResult"] = metadata_dict["Detectors"].pop(key)
+            metadata_dict["Detectors"]["Detector-BinaryResult"]["DetectorName"] = prefix
             break  # stop after first match
 
     # Keep only detectors with Enabled == "true" and Inserted == "true"
     detectors = metadata_dict.get("Detectors", {})
     keys_to_remove = []
     for key in list(detectors.keys()):
-        if key.startswith("Detector-"):
+        if key.startswith("Detector-") and key != "Detector-BinaryResult":
             detector = detectors[key]
             if not (detector.get("Enabled", "") == "true" and detector.get("Inserted", "") == "true"):
                 keys_to_remove.append(key)
