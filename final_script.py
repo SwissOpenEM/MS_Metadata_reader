@@ -79,6 +79,7 @@ def process_emd_metadata(metadata_dict):
     for key in list(metadata_dict["Detectors"].keys()):
         if key.startswith("Detector-") and metadata_dict["Detectors"][key].get("DetectorName", "").startswith(prefix):
             metadata_dict["Detectors"]["BinaryResultDetector"] = metadata_dict["Detectors"].pop(key)
+            metadata_dict["Detectors"]["BinaryResultDetector"]["DetectorName"] = prefix
             break  # stop after first match
 
     # Keep only detectors with Enabled == "true" and Inserted == "true"
