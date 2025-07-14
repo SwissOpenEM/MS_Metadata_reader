@@ -65,32 +65,32 @@ def flatten_metadata(metadata_dict, parent_key="", sep="."):
 def process_emd_metadata(metadata_dict):
     """ Processes the metadata dictionary to identify and categorize detectors."""
 
-    # Identify imaging (camera) detector - there should be only one
-    imaging_detector = next(
-        (detector for detector in metadata_dict.get("Detectors", {}).values()
-        if detector.get("DetectorType") == "ImagingDetector"),
-        None # default if not found
-    )
-    metadata_dict["Detectors"]["Detector-camera"] = imaging_detector
+    # Identify all imaging (camera) detectors and store them as ImagingDetector1, ImagingDetector2, etc.
+    imaging_detectors = [
+        detector for detector in metadata_dict.get("Detectors", {}).values()
+        if detector.get("DetectorType") == "ImagingDetector"
+    ]
+    for idx, detector in enumerate(imaging_detectors, start=1):
+        metadata_dict["Detectors"][f"ImagingDetector{idx}"] = detector
 
-    # Identify analytical detector - do not keep the segments
+    # Identify binary result detector
     prefix = metadata_dict["BinaryResult"]["Detector"]
-    # Find first detector with DetectorName starting with prefix
-    for key, value in metadata_dict["Detectors"].items():
-        if value.get("DetectorName", "").startswith(prefix):
-            metadata_dict["Detectors"]["Detector-analytical"] = metadata_dict["Detectors"].pop(key)
-            break # stop after first match
+    # Find first detector with key Detectors.Detector-[somenumber] and DetectorName starting with prefix
+    for key in list(metadata_dict["Detectors"].keys()):
+        if key.startswith("Detector-") and metadata_dict["Detectors"][key].get("DetectorName", "").startswith(prefix):
+            metadata_dict["Detectors"]["BinaryResultDetector"] = metadata_dict["Detectors"].pop(key)
+            break  # stop after first match
 
-    # Identify scanning detectors in use
-    scanning_detectors = {
-        key: detector
-        for key, detector in metadata_dict.get("Detectors", {}).items()
-        if detector.get("DetectorType", "") == "ScanningDetector"
-        and detector.get("Enabled", "") == "true"
-        and detector.get("Inserted", "") == "true"
-    }
-    for key, value in scanning_detectors.items():
-        metadata_dict["Detectors"]["Detector-" + value["DetectorName"]] = metadata_dict["Detectors"].pop(key)
+    # Keep only detectors with Enabled == "true" and Inserted == "true"
+    detectors = metadata_dict.get("Detectors", {})
+    keys_to_remove = []
+    for key in list(detectors.keys()):
+        if key.startswith("Detector-"):
+            detector = detectors[key]
+            if not (detector.get("Enabled", "") == "true" and detector.get("Inserted", "") == "true"):
+                keys_to_remove.append(key)
+    for key in keys_to_remove:
+        detectors.pop(key)
 
     return metadata_dict
 
@@ -141,6 +141,18 @@ def process_prz_metadata(metadata_dict):
         metadata_dict[key_to_update + "[1]"] = str(binning[1]) if len(binning) > 1 else str(binning[0])
         del metadata_dict[key_to_update]
 
+    key_to_find_1 = "Acquisition_instrument.TEM.acquisition_mode"
+    key_to_find_2 = "General.title"
+    key_to_add = "Extractor.operating_mode"
+    if key_to_find_1 in metadata_dict and key_to_find_2 in metadata_dict:
+        metadata_dict[key_to_add] = metadata_dict[key_to_find_1] + " " + metadata_dict[key_to_find_2]
+
+    key_to_find_1 = "source.detector_config.description"
+    key_to_find_2 = "source.name"
+    if key_to_find_1 in metadata_dict and key_to_find_2 in metadata_dict:
+        if metadata_dict[key_to_find_1] == metadata_dict[key_to_find_2]:
+            del metadata_dict[key_to_find_2]
+
     return metadata_dict
 
 
@@ -159,7 +171,7 @@ def emd_extractor(metadata_dict: dict) -> dict:
 
 
 def prz_extractor(metadata_dict: dict) -> dict:
-    """Reads metadata from an PRZ file and processes it."""
+    """Reads metadata from a PRZ file and processes it."""
 
     return convert_final_valuetypes(
         process_prz_metadata(
