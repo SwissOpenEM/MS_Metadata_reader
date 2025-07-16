@@ -122,6 +122,11 @@ def map_emd_values(metadata_dict):
         dt = datetime.fromtimestamp(int(metadata_dict[key_to_update]))
         metadata_dict[key_to_update] = dt.strftime('%Y-%m-%d %H:%M:%S')
 
+    key_to_find_1 = "Instrument.InstrumentClass"
+    key_to_find_2 = "Instrument.InstrumentModel"
+    if key_to_find_1 in metadata_dict and key_to_find_2 in metadata_dict:
+        metadata_dict[key_to_find_2] = metadata_dict[key_to_find_1] + " " + metadata_dict[key_to_find_2]
+
     return metadata_dict
 
 

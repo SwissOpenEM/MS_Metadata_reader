@@ -1,6 +1,5 @@
 ﻿oscem,fromformat,optionals,units,crunch,type
 ,,,,,
-instrument.microscope.class,Instrument.InstrumentClass,,,,String
 instrument.microscope.model,Instrument.InstrumentModel,,,,String
 instrument.microscope.manufacturer,Instrument.Manufacturer,,,,String
 instrument.imaging,General.title,,,,String
