@@ -1,4 +1,4 @@
-__pycache__/*
-.pytest_cache/*
-files/*
+*/__pycache__/*
 *_metadata/*
+/results
+/data
