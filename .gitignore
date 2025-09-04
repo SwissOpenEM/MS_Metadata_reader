@@ -1,4 +1,6 @@
-__pycache__/*
-.pytest_cache/*
-files/*
-*_metadata/*
+*/__pycache__
+/examples
+/data
+/results
+/ms_extractor
+ms_reader
