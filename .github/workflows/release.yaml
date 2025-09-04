@@ -17,11 +17,36 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12.0"
+
+      - name: Create venv
+        run: python -m venv venv
+
+      - name: Activate venv and install dependencies
+        run: |
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install pyinstaller numpy==2.3.2 h5py==3.14.0 rsciio==0.10.0 sparse==0.17.0
+
+      - name: Build extractor binary
+        run: |
+          source venv/bin/activate
+          pyinstaller --onefile --name=extractor_bin extractor/__main__.py \
+            --hidden-import=numpy.core._multiarray_umath \
+            --hidden-import=numpy.core._multiarray \
+            --collect-all=numpy
+          rm -rf build/
+          rm *.spec
+
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
           go-version: stable
-        
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:
