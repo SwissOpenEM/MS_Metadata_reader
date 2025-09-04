@@ -24,7 +24,7 @@ Note that the metadata of those will not be as complete.
 - python 3.12
 - numpy 2.3.2
 - h5py 3.14.0
-- rsciio 0.10.0
+- rosettasciio 0.10.0
 - sparse 0.17.0
 
 ### Usage

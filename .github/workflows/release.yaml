@@ -21,7 +21,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12.0"
+          python-version: "3.12"
 
       - name: Create venv
         run: python -m venv venv
@@ -29,8 +29,7 @@ jobs:
       - name: Activate venv and install dependencies
         run: |
           source venv/bin/activate
-          pip install --upgrade pip
-          pip install pyinstaller numpy==2.3.2 h5py==3.14.0 rsciio==0.10.0 sparse==0.17.0
+          pip install pyinstaller numpy==2.3.2 h5py==3.14.0 rosettasciio==0.10.0 sparse==0.17.0
 
       - name: Build extractor binary
         run: |
