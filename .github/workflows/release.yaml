@@ -29,11 +29,11 @@ jobs:
       - name: Activate venv and install dependencies
         run: |
           source venv/bin/activate
+          pip install --upgrade pip
           pip install pyinstaller numpy==2.3.2 h5py==3.14.0 rosettasciio==0.10.0 sparse==0.17.0
 
       - name: Build extractor binary
         run: |
-          source venv/bin/activate
           pyinstaller --onefile --name=extractor_bin extractor/__main__.py \
             --hidden-import=numpy.core._multiarray_umath \
             --hidden-import=numpy.core._multiarray \
