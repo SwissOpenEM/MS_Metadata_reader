@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"flag"
 	"fmt"
 	"os"
 	"os/exec"
@@ -38,24 +39,25 @@ func runCmd(name string, args ...string) (string, error) {
 }
 
 func main() {
-	if len(os.Args) < 3 {
-		fmt.Println("Usage: ms_reader <input_directory> <output_directory> [extra_args...]")
+	inputDir := flag.String("i", "", "Input directory containing the file to process (required)")
+	outputDir := flag.String("o", "", "Output directory for results (required)")
+
+	flag.Parse()
+	if *inputDir == "" || *outputDir == "" {
+		fmt.Fprintf(os.Stderr, "Usage: %s -i <input_directory> -o <output_directory>\n", os.Args[0])
+		flag.PrintDefaults()
 		os.Exit(1)
 	}
 
-	inputDir := os.Args[1]
-	outputDir := os.Args[2]
-	// converterArgs := os.Args[3:]
-
 	// Get file type from input directory
-	fileExt, err := getFileTypeFromDir(inputDir)
+	fileExt, err := getFileTypeFromDir(*inputDir)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Failed to detect file type:", err)
 		os.Exit(1)
 	}
 
 	// Ensure output dir exists
-	if err := os.MkdirAll(outputDir, 0755); err != nil {
+	if err := os.MkdirAll(*outputDir, 0755); err != nil {
 		fmt.Fprintln(os.Stderr, "Failed to create output dir:", err)
 		os.Exit(1)
 	}
@@ -69,7 +71,7 @@ func main() {
 	extractorPath := filepath.Join(execDir, "dist/extractor_bin")
 
 	fmt.Println("=== Running Python extractor ===")
-	args := []string{inputDir, outputDir}
+	args := []string{*inputDir, *outputDir}
 	data, err := runCmd(extractorPath, args...)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Extractor failed due to:", err)
@@ -79,7 +81,7 @@ func main() {
 	fmt.Println("=== Running Go converter ===")
 	// Point to the CSV file in the Converter project
 	converterCSVPath := filepath.Join("..", "Converter", "csv", "ms_conversions_"+fileExt+".csv")
-	out, err := conversion.Convert([]byte(data), converterCSVPath, "", "", outputDir+"/converted.json")
+	out, err := conversion.Convert([]byte(data), converterCSVPath, "", "", *outputDir+"/converted.json")
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Converter failed due to:", err)
 		os.Exit(1)
