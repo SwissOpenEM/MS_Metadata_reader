@@ -25,6 +25,7 @@ Note that the metadata of those will not be as complete.
 - numpy 2.3.2
 - h5py 3.14.0
 - rsciio 0.10.0
+- sparse 0.17.0
 
 ### Usage
 You can directly run the extractor as it is, with `python3 -m extractor <input_directory> <output_directory>`.
@@ -53,17 +54,18 @@ pip install pyinstaller
 
 **2. Usage:**
 ```bash
-pyinstaller --onefile --name=extractor_bin extractor/__main__.py
+pyinstaller --onefile --name=extractor_bin extractor/__main__.py --hidden-import=numpy.core._multiarray_umath --hidden-import=numpy.core._multiarray --collect-all=numpy
 ```
 
 Where:
 - `--onefile`: Creates single executable (slower startup; extracts to temp directory)
 - `--name=extractor_bin`: Custom name for the executable
+- `--hidden-import`: Add these flags to ensure numpy compatibility
 - PyInstaller automatically detected and included:
   - `rsciio` and its dependencies
   - `numpy` and related libraries
   - `h5py` for HDF5 file support
-
+  - `sparse` for n-d array support
 
 This creates:
 - `dist/` directory with your executable
