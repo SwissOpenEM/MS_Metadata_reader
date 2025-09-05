@@ -1,7 +1,7 @@
 # Materials Science EM Metadata Extractor
 
 A Python script that extracts metadata from EM data for Materials Science.
-The extractor is wrapped by a GoLang orchestrator, which will feed the extracted metadata to the [Converter](https://github.com/osc-em/Converter), for conversion to OSC-EM schema.
+The extractor is wrapped by a GoLang orchestrator, which will feed the extracted metadata to the [Converter](https://github.com/osc-em/Converter), for conversion to [OSC-EM schema](https://github.com/osc-em/OSCEM_Schemas).
 Currently supported file formats: `.emd`, `.prz`.
 
 ## Description
