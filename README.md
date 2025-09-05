@@ -21,7 +21,7 @@ For these unsupported files we use `numpy` for manual extraction.
 Note that the metadata of those will not be as complete.
 
 ### Dependencies
-Found in [requirements.txt](./.github/workflows/requirements.txt)
+Found in [requirements.txt](./requirements.txt)
 
 ### Usage
 You can directly run the extractor as it is, with `python3 -m extractor <input_directory> <output_directory>`.
