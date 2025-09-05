@@ -19,9 +19,9 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12.3"
 
       - name: Create venv
         run: python -m venv venv
@@ -30,7 +30,7 @@ jobs:
         run: |
           source venv/bin/activate
           pip install --upgrade pip
-          pip install pyinstaller numpy==2.3.2 h5py==3.14.0 rosettasciio==0.10.0 sparse==0.17.0
+          pip install -r requirements.txt
 
       - name: Build extractor binary
         run: |

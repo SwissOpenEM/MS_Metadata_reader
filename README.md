@@ -21,11 +21,7 @@ For these unsupported files we use `numpy` for manual extraction.
 Note that the metadata of those will not be as complete.
 
 ### Dependencies
-- python 3.12
-- numpy 2.3.2
-- h5py 3.14.0
-- rosettasciio 0.10.0
-- sparse 0.17.0
+Found in [requirements.txt](./.github/workflows/requirements.txt)
 
 ### Usage
 You can directly run the extractor as it is, with `python3 -m extractor <input_directory> <output_directory>`.
@@ -65,7 +61,6 @@ Where:
   - `rsciio` and its dependencies
   - `numpy` and related libraries
   - `h5py` for HDF5 file support
-  - `sparse` for n-d array support
 
 This creates:
 - `dist/` directory with your executable
