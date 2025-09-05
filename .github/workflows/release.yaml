@@ -24,20 +24,17 @@ jobs:
           python-version: "3.12.3"
 
       - name: Create venv
-        run: python -m venv venv
+        run: python -m venv ms_extractor
 
       - name: Activate venv and install dependencies
         run: |
-          source venv/bin/activate
+          source ms_extractor/bin/activate
           pip install -r requirements.txt
 
       - name: Build extractor binary
         run: |
-          source venv/bin/activate
+          source ms_extractor/bin/activate
           pyinstaller --onefile --name=extractor_bin extractor/__main__.py
-            # --hidden-import=numpy.core._multiarray_umath \
-            # --hidden-import=numpy.core._multiarray \
-            # --collect-all=numpy
           rm -rf build/
           rm *.spec
 
