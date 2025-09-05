@@ -50,12 +50,13 @@ jobs:
           git lfs track "dist/extractor_bin"
           git add .gitattributes
           git commit -m "Track extractor_bin with Git LFS"
-          git add dist/extractor_bin
-          if ! git diff --cached --quiet; then
+          if git diff dist/extractor_bin --quiet; then
+            echo "No changes in dist/extractor_bin"
+            rm -rf dist/
+          else
+            git add dist/extractor_bin
             git commit -m "Generate python executable"
             git push origin main
-          else
-            echo "No changes to commit for dist/extractor_bin"
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
