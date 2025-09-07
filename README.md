@@ -1,7 +1,7 @@
 # Materials Science EM Metadata Extractor
 
 A Python script that extracts metadata from EM data for Materials Science.
-The extractor is wrapped by a GoLang orchestrator, which will feed the extracted metadata to the [Converter](https://github.com/osc-em/Converter), for conversion to OSC-EM schema.
+The extractor is wrapped by a GoLang orchestrator, which will feed the extracted metadata to the [Converter](https://github.com/osc-em/Converter), for conversion to [OSC-EM schema](https://github.com/osc-em/OSCEM_Schemas).
 Currently supported file formats: `.emd`, `.prz`.
 
 ## Description
@@ -21,15 +21,11 @@ For these unsupported files we use `numpy` for manual extraction.
 Note that the metadata of those will not be as complete.
 
 ### Dependencies
-- python 3.12
-- numpy 2.3.2
-- h5py 3.14.0
-- rsciio 0.10.0
-- sparse 0.17.0
+Python 3.12.3, plus those found in [requirements.txt](./requirements.txt)
 
 ### Usage
 You can directly run the extractor as it is, with `python3 -m extractor <input_directory> <output_directory>`.
-For each file inside <input_directory> with name <file_name>, it will create a metadata file in <output_directory>, named <file_name>_metadata.json, and it will also print out the same results.
+For each file inside <input_directory> with name <file_name>, it will create a metadata file in <output_directory>, named "<file_name>_metadata.json", and it will also print out the same results.
 
 
 ## Go Wrapper
@@ -65,7 +61,6 @@ Where:
   - `rsciio` and its dependencies
   - `numpy` and related libraries
   - `h5py` for HDF5 file support
-  - `sparse` for n-d array support
 
 This creates:
 - `dist/` directory with your executable
