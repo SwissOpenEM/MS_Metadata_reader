@@ -97,12 +97,13 @@ At the end, `converted.json` will be written inside the same <output_directory>.
 #### Usage
 ```
 go build -o ms_reader main.go
-./ms_reader <input_directory> <output_directory>
+./ms_reader -i <input_directory> -o <output_directory>
 ```
 
 #### Notes
-For MS we assume that one experiment (one dataset) will only consist of one file.
-Hence, <input_directory> should contain one file each time.
+For MS we assume that **one experiment (one dataset) will only consist of one file**.
+Hence, **<input_directory> should contain one file each time**.
+
 Then, the <output_directory> will contain two files: the extracted metadata and the converted one.
 That is, the current version of the MS reader does not cover cases where a dataset may consist of multiple files.
 
