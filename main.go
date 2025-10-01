@@ -40,11 +40,11 @@ func runCmd(name string, args ...string) (string, error) {
 
 func main() {
 	inputDir := flag.String("i", "", "Input directory containing the file to process (required)")
-	outputDir := flag.String("o", "", "Output directory for results (required)")
+	outputFile := flag.String("o", "", "Output file for results (required)")
 
 	flag.Parse()
-	if *inputDir == "" || *outputDir == "" {
-		fmt.Fprintf(os.Stderr, "Usage: %s -i <input_directory> -o <output_directory>\n", os.Args[0])
+	if *inputDir == "" || *outputFile == "" {
+		fmt.Fprintf(os.Stderr, "Usage: %s -i <input_directory> -o <output_file>\n", os.Args[0])
 		flag.PrintDefaults()
 		os.Exit(1)
 	}
@@ -56,9 +56,10 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Ensure output dir exists
-	if err := os.MkdirAll(*outputDir, 0755); err != nil {
-		fmt.Fprintln(os.Stderr, "Failed to create output dir:", err)
+	// Ensure output file directory exists
+	outputFilePath := *outputFile
+	if err := os.MkdirAll(filepath.Dir(outputFilePath), 0755); err != nil {
+		fmt.Fprintln(os.Stderr, "Failed to create output file directory:", err)
 		os.Exit(1)
 	}
 
@@ -71,7 +72,7 @@ func main() {
 	extractorPath := filepath.Join(execDir, "dist", "extractor_bin")
 
 	fmt.Println("=== Running Python extractor ===")
-	args := []string{*inputDir, *outputDir}
+	args := []string{*inputDir}
 	data, err := runCmd(extractorPath, args...)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Extractor failed due to:", err)
@@ -81,7 +82,7 @@ func main() {
 	fmt.Println("=== Running Go converter ===")
 	// Point to the CSV file in the Converter project
 	converterCSVPath := filepath.Join("..", "Converter", "csv", "ms_conversions_"+fileExt+".csv")
-	out, err := conversion.Convert([]byte(data), converterCSVPath, "", "", *outputDir+"/converted.json")
+	out, err := conversion.Convert([]byte(data), converterCSVPath, "", "", outputFilePath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Converter failed due to:", err)
 		os.Exit(1)

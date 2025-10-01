@@ -24,9 +24,10 @@ Note that the metadata of those will not be as complete.
 Python 3.12.3, plus those found in [requirements.txt](./requirements.txt)
 
 ### Usage
-You can directly run the extractor as it is, with `python3 -m extractor <input_directory> <output_directory>`.
-For each file inside <input_directory> with name <file_name>, it will create a metadata file in <output_directory>, named "<file_name>_metadata.json", and it will also print out the same results.
+You can directly run the extractor as it is, with `python3 -m extractor <input_directory>`.
 
+For each file inside <input_directory> with name <file_name>, the script will create a metadata file named "<file_name>_metadata.json", and it will also print out the same results.
+By default, it will create a folder named "ms_extractor_results" where all the outputs will be written.
 
 ## Go Wrapper
 
@@ -70,7 +71,7 @@ This creates:
 **3. After compilation:**
 ```bash
 # Test the executable
-./dist/extractor_bin <input_directory> <output_directory>
+./dist/extractor_bin <input_directory>
 
 # Check file type
 file dist/extractor_bin
@@ -91,20 +92,22 @@ Keep only `dist/extractor_bin` for distribution.
 
 ### Using the executable
 
-The Python executable is called by `main.go`, which after completing the metadata extraction, will then call the Go module for convertion to OSC-EM schema.
-At the end, `converted.json` will be written inside the same <output_directory>.
+The Python executable that we created is being called by `main.go`.
+After completing the metadata extraction, as seen above, the Go orchestrator will then call the module for convertion to OSC-EM schema.
+
+The orchestrator is now expecting **two required flagged arguments**:
+- `-i <input_directory>`: is the input directory described above, which feeds the data to the Python extractor
+- `-o <output_file>`: is the name of the file containing the final result, after conversion to OSC-EM is completed
 
 #### Usage
 ```
 go build -o ms_reader main.go
-./ms_reader -i <input_directory> -o <output_directory>
+./ms_reader -i <input_directory> -o <output_file>
 ```
 
 #### Notes
 For MS we assume that **one experiment (one dataset) will only consist of one file**.
 Hence, **<input_directory> should contain one file each time**.
-
-Then, the <output_directory> will contain two files: the extracted metadata and the converted one.
 That is, the current version of the MS reader does not cover cases where a dataset may consist of multiple files.
 
 For the converter to understand which MS conversion table to use, we read the type of the file inside <input_directory> and instruct the Go module to use the revelant table.

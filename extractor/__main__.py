@@ -197,18 +197,18 @@ if __name__ == "__main__":
     in an output directory. Unsupported file formats are skipped.
 
     Usage:
-        python3 -m extractor <input_directory> <output_directory>
+        python3 -m extractor <input_directory>
     """
 
     try:
-        if len(sys.argv) != 3:
-            raise Exception("Please provide input and output directory names as arguments: python3 -m extractor <input_directory> <output_directory>")
+        if len(sys.argv) != 2:
+            raise Exception("Please provide the input directory name, like so: 'python3 -m extractor <input_directory>'.")
 
         input_dir = sys.argv[1]
         if not (os.path.exists(input_dir) and os.path.isdir(input_dir)):
             raise Exception(f"Directory with name '{input_dir}' does not exist.")
 
-        output_dir = sys.argv[2]
+        output_dir = "ms_extractor_results"
         os.makedirs(output_dir, exist_ok=True)
 
         for filename in os.listdir(input_dir):
