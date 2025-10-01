@@ -28,6 +28,7 @@ archives:
         format: zip
     files:
       - README.md
+      - dist/extractor_bin
 
 changelog:
   sort: asc

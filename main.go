@@ -68,7 +68,7 @@ func main() {
 		os.Exit(1)
 	}
 	execDir := filepath.Dir(execPath)
-	extractorPath := filepath.Join(execDir, "dist/extractor_bin")
+	extractorPath := filepath.Join(execDir, "dist", "extractor_bin")
 
 	fmt.Println("=== Running Python extractor ===")
 	args := []string{*inputDir, *outputDir}
