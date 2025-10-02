@@ -36,6 +36,28 @@ jobs:
             cmake \
             make
 
+      - name: Install dependencies
+        run: |
+          apk add --no-cache \
+            git \
+            python3 \
+            python3-dev \
+            py3-pip \
+            py3-virtualenv \
+            gcc \
+            g++ \
+            gfortran \
+            musl-dev \
+            linux-headers \
+            libffi-dev \
+            hdf5-dev \
+            openblas-dev \
+            lapack-dev \
+            llvm15-dev \
+            llvm15-static \
+            cmake \
+            make
+
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -47,10 +69,18 @@ jobs:
       - name: Create venv
         run: python3 -m venv ms_extractor
 
-      - name: Activate venv and install dependencies
+      - name: Set LLVM config for llvmlite
+        run: |
+          export LLVM_CONFIG=/usr/lib/llvm15/bin/llvm-config
+          echo "LLVM_CONFIG=/usr/lib/llvm15/bin/llvm-config" >> $GITHUB_ENV
+
+      - name: Install dependencies in order
         run: |
           source ms_extractor/bin/activate
           pip install --upgrade pip setuptools wheel
+          # Install numpy first (required by numba)
+          pip install numpy
+          # Then install the rest
           pip install -r requirements.txt
 
       - name: Build extractor binary
