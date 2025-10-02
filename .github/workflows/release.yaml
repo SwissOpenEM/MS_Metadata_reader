@@ -23,9 +23,18 @@ jobs:
             py3-pip \
             py3-virtualenv \
             gcc \
+            g++ \
+            gfortran \
             musl-dev \
             linux-headers \
-            libffi-dev
+            libffi-dev \
+            hdf5-dev \
+            openblas-dev \
+            lapack-dev \
+            llvm-dev \
+            llvm17-static \
+            cmake \
+            make
 
       - name: Checkout
         uses: actions/checkout@v4
