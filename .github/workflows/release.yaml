@@ -40,6 +40,7 @@ jobs:
       - name: Build extractor binary
         run: |
           source ms_extractor/bin/activate
+          rm -rf dist/
           pyinstaller --onefile --name=extractor_bin extractor/__main__.py
           rm -rf build/
           rm *.spec
