@@ -29,6 +29,7 @@ archives:
     files:
       - README.md
       - dist/extractor_bin
+      - csv/
 
 changelog:
   sort: asc

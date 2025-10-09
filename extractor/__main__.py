@@ -208,8 +208,8 @@ if __name__ == "__main__":
         if not (os.path.exists(input_dir) and os.path.isdir(input_dir)):
             raise Exception(f"Directory with name '{input_dir}' does not exist.")
 
-        output_dir = "ms_extractor_results"
-        os.makedirs(output_dir, exist_ok=True)
+        # output_dir = "ms_extractor_results"
+        # os.makedirs(output_dir, exist_ok=True)
 
         for filename in os.listdir(input_dir):
             print("\n" + filename, file=sys.stderr)
@@ -277,9 +277,10 @@ if __name__ == "__main__":
                 pass
 
             # save metadata as a json file
-            with open(os.path.join(output_dir, filename.replace(" ", "_") + "_metadata.json"), "w") as outfile:
-                json.dump(metadata_dict, outfile, sort_keys=True, indent=4)
+            # with open(os.path.join(output_dir, filename.replace(" ", "_") + "_metadata.json"), "w") as outfile:
+            #     json.dump(metadata_dict, outfile, sort_keys=True, indent=4)
 
+            # print the metadata to stdout for the converter to read
             print(json.dumps(metadata_dict, sort_keys=True))
 
     except Exception as e:

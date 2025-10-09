@@ -68,6 +68,9 @@ jobs:
         with:
           go-version: stable
 
+      - name: Download CSV files
+        run: go generate
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v6
         with:

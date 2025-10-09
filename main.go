@@ -12,6 +12,10 @@ import (
 	conversion "github.com/osc-em/Converter"
 )
 
+//go:generate mkdir -p csv
+//go:generate wget https://raw.githubusercontent.com/osc-em/Converter/refs/heads/main/csv/ms_conversions_emd.csv -O csv/ms_conversions_emd.csv
+//go:generate wget https://raw.githubusercontent.com/osc-em/Converter/refs/heads/main/csv/ms_conversions_prz.csv -O csv/ms_conversions_prz.csv
+
 func getFileTypeFromDir(dirPath string) (string, error) {
 	entries, err := os.ReadDir(dirPath)
 	if err != nil {
@@ -80,8 +84,8 @@ func main() {
 	}
 
 	fmt.Println("=== Running Go converter ===")
-	// Point to the CSV file in the Converter project
-	converterCSVPath := filepath.Join("..", "Converter", "csv", "ms_conversions_"+fileExt+".csv")
+	// Use the CSV file downloaded by go generate in csv folder
+	converterCSVPath := filepath.Join(execDir, "csv", "ms_conversions_"+fileExt+".csv")
 	out, err := conversion.Convert([]byte(data), converterCSVPath, "", "", outputFilePath)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Converter failed due to:", err)
