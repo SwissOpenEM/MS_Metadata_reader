@@ -40,7 +40,6 @@ jobs:
       - name: Build extractor binary
         run: |
           source ms_extractor/bin/activate
-          rm -rf dist/
           pyinstaller --onefile --name=extractor_bin extractor/__main__.py
           rm -rf build/
           rm *.spec
@@ -54,8 +53,8 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout main
-          git add dist/extractor_bin
-          git add csv/
+          git add -f dist/extractor_bin
+          git add -f csv/
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
