@@ -26,7 +26,8 @@ Python 3.12.3, plus those found in [requirements.txt](./requirements.txt)
 ### Usage
 You can directly run the extractor as it is, with `python3 -m extractor <input_directory>`.
 
-For each file inside <input_directory> with name <file_name>, the script will create a metadata file named "<file_name>_metadata.json", and it will also print out the same results.
+For each file inside <input_directory> with name <file_name>, the script will print out the metadata results.
+If you uncomment the relevant part of the code in the script, then it will also create a metadata file named "<file_name>_metadata.json" for each file.
 By default, it will create a folder named "ms_extractor_results" where all the outputs will be written.
 
 ## Go Wrapper

@@ -1,6 +1,7 @@
 */__pycache__
 /csv
 /data
+/dist
 /ms_extractor_results
 /ms_extractor
 ms_reader
